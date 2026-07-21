@@ -18,3 +18,4 @@ on:
             sudo apt install openjdk-17jdk -y
             sudo apt install maven -y
             
+S
