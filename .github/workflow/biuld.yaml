@@ -1,0 +1,20 @@
+name: maven build workflow
+on:
+  workflow_dispatch:
+  jobs:
+    maven_build:
+      runs-on: ubuntu-latest
+      if: ${{github.refname == 'main'}}
+      steps:
+        -name: checkout repo branch
+        -uses: actions/checkout@v4
+        -with:
+          repository:  sriram0157/spring-petclinic
+          ref: main
+          path: spring-petclinic
+          -name: install java
+          -run: |
+            sudo apt update
+            sudo apt install openjdk-17jdk -y
+            sudo apt install maven -y
+            
