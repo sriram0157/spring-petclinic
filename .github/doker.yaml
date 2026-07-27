@@ -6,7 +6,7 @@ on:
         default: spring
         type: string
         required: true
-      DOCKER_USERNAME:
+      DOCKERHUB_USERNAME:
         type: string
         default: 123sri
         required: true
@@ -26,7 +26,7 @@ jobs:
       - name: Log in to Dockerhub
         uses: docker/login-action@v4
         with:
-          username: ${{ secrets.events.inputs.DOCKER_USERNAME }}
+          username: ${{ secrets.events.inputs.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKER_SECRET }}
 
       - name: Build and push Docker image
@@ -34,14 +34,14 @@ jobs:
         if: ${{github.ref_name == 'main' }}
         with:
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.inputs.dockerimage }}:${{ github.run_id}}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.inputs.dockerimage }}:${{ github.run_id}}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v7
         if: ${{github.ref_name != 'main' }}
         with:
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.inputs.dockerimage }}-snapshot:${{ github.run_id}}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.inputs.dockerimage }}-snapshot:${{ github.run_id}}
           
  
  
