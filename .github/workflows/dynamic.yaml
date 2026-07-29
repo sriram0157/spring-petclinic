@@ -1,0 +1,14 @@
+name: Dynamic
+on:
+  push:
+    branches: "*"
+jobs:
+  test:
+    runs-on: ${{matrix.os}}
+    steps:
+      - name: checkout
+        uses: action/checkout@v7
+        
+      - name: install chart version
+        run: |
+          echo "BUILD_ID = $(date +%d-%m-%y)
