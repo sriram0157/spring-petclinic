@@ -18,6 +18,7 @@ jobs:
 
       - name: Print dynamic
         run: |
+        
           echo "####################################">>"$GITHUB_STEP_SUMMARY"
           echo "build name : sample job ####################">>"$GITHUB_STEP_SUMMARY"
           echo "build started day: ${{env.BUILD_ID}}">>"$GITHUB_STEP_SUMMARY"
