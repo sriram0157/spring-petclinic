@@ -1,0 +1,15 @@
+name: steps testing
+on:
+   push:
+     branches: "*"
+jobs:
+    build_id:
+      runs-on: ubuntu-latest
+      steps:
+      - name: sample data
+        id: version
+        run: |
+          echo "version = 1.2.3" >> "$GITHUB-OUTPUT"
+      - name: print outputs 
+        run: |
+          echo "build version is $ {{steps.version_data.outputs.version}}"
