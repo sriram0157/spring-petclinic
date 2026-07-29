@@ -11,7 +11,7 @@ jobs:
         
       - name: install chart version
         run: |
-          echo "BUILD_ID = $(date +%d-%m-%y) >> ${{GITHUB_ENV}}
-      name: print dynamic
-      run: |
-        echo "${{env.BUILD_ID}}"
+          echo "BUILD_ID = $(date +%d-%m-%y) >>$GITHUB_ENV
+      - name: print dynamic
+        run: |
+          echo "${{ENV.BUILD_ID}}"
