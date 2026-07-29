@@ -1,17 +1,21 @@
 name: Dynamic
+
 on:
   push:
-    branches: "*"
+    branches:
+      - "*"
+
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
-        uses: action/checkout@v7
-        
-      - name: install chart version
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Install chart version
         run: |
-          echo "BUILD_ID = $(date +%d-%m-%y) >>$GITHUB_ENV
-      - name: print dynamic
+          echo "BUILD_ID=$(date +%d-%m-%y)" >> $GITHUB_ENV
+
+      - name: Print dynamic
         run: |
-          echo "${{ENV.BUILD_ID}}"
+          echo "${{env.BUILD_ID}}"
