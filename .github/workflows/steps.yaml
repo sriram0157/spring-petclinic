@@ -5,6 +5,8 @@ on:
 jobs:
     build_id:
       runs-on: ubuntu-latest
+      outputs:
+        value_id: ${{steps.version_data.outputs.version}}
       steps:
       - name: sample data
         id: version
@@ -13,3 +15,10 @@ jobs:
       - name: print outputs 
         run: |
           echo "build version is $ {{steps.version_data.outputs.version}}"
+ test-data:
+   runs-on: ubuntu-slim
+   needs: build_id
+   steps:
+    - name: demo
+      run: |
+        echo "jobs version id is ${{needs.build_id.outputs.value_id}}
