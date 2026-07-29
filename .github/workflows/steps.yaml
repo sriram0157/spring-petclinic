@@ -1,24 +1,29 @@
 name: steps testing
+
 on:
-   push:
-     branches: "*"
+  push:
+    branches:
+      - "*"
+
 jobs:
-    build_id:
-      runs-on: ubuntu-latest
-      outputs:
-        value_id: ${{steps.version_data.outputs.version}}
-      steps:
+  build_id:
+    runs-on: ubuntu-latest
+    outputs:
+      value_id: ${{ steps.version.outputs.version }}
+    steps:
       - name: sample data
         id: version
         run: |
-          echo "version = 1.2.3" >> "$GITHUB-OUTPUT"
-      - name: print outputs 
+          echo "version=1.2.3" >> $GITHUB_OUTPUT
+
+      - name: print outputs
         run: |
-          echo "build version is $ {{steps.version_data.outputs.version}}"
- test-data:
-   runs-on: ubuntu-slim
-   needs: build_id
-   steps:
-    - name: demo
-      run: |
-        echo "jobs version id is ${{needs.build_id.outputs.value_id}}
+          echo "build version is ${{ steps.version.outputs.version }}"
+
+  test-data:
+    runs-on: ubuntu-latest
+    needs: build_id
+    steps:
+      - name: demo
+        run: |
+          echo "jobs version id is ${{ needs.build_id.outputs.value_id }}"
