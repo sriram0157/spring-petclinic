@@ -31,7 +31,7 @@ jobs:
 
       - name: Build and Push (Main)
         if: github.ref_name == 'main'
-        uses: docker/build-push-action@v7
+        uses: docker/build-push-action@v4
         with:
           context: .
           push: true
@@ -39,7 +39,7 @@ jobs:
 
       - name: Build and Push (Snapshot)
         if: github.ref_name != 'main'
-        uses: docker/build-push-action@v7
+        uses: docker/build-push-action@v4
         with:
           context: .
           push: true
