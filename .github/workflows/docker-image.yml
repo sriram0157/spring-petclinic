@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4   # latest stable
+        uses: actions/checkout@v7  # latest stable
 
       - name: Setup Buildx
         uses: docker/setup-buildx-action@v3
@@ -31,7 +31,7 @@ jobs:
 
       - name: Build and Push (Main)
         if: github.ref_name == 'main'
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v4
         with:
           context: .
           file: ./Dockerfile   # adjust if your Dockerfile is in a subfolder
@@ -40,7 +40,7 @@ jobs:
 
       - name: Build and Push (Snapshot)
         if: github.ref_name != 'main'
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v4
         with:
           context: .
           file: ./Dockerfile   # adjust if needed
