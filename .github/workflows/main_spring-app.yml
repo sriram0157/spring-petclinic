@@ -25,19 +25,18 @@ jobs:
       - name: Build with Maven
         run: mvn clean package -DskipTests
 
-      - name: Check JAR files
+      - name: Show generated JAR files
         run: |
-           echo "JAR files generated:"
-             ls -lh target/*.jar
-        
+          echo "Generated JAR files:"
+          ls -lh target/*.jar
 
       - name: Azure Login
         uses: azure/login@v2
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Deploy to Azure Web App
+      - name: Deploy Spring Petclinic to Azure
         uses: azure/webapps-deploy@v3
         with:
           app-name: spring-app
-          package: target/*.jar
+          package: target/spring-petclinic-*.jar
