@@ -1,4 +1,4 @@
-name: Build and Deploy to NGINX
+name: Build Application
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,22 +24,3 @@ jobs:
 
       - name: Verify JAR File
         run: ls -l target/
-
-      - name: Copy Artifact to Server
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          source: "target/*.jar"
-          target: "/opt/apps"
-
-      - name: Restart Application
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          script: |
-            pkill -f jar || true
-            nohup java -jar /opt/apps/*.jar > app.log 2>&1 &
