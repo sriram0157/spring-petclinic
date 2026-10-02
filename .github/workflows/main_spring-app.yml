@@ -42,6 +42,6 @@ jobs:
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: spring_app
+          app-name: SPRING_APP
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_75ED4FA857FD4859BA1401E5CDC8BD68 }}
           package: "*.jar"
