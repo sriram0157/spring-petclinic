@@ -1,3 +1,4 @@
+```yaml
 name: Build and Deploy Java App to Azure Web App - spring-app
 
 on:
@@ -39,9 +40,14 @@ jobs:
         with:
           name: java-app
 
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: AZURE_CREDENTIALS
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_75ED4FA857FD4859BA1401E5CDC8BD68 }}
+          app-name: spring-app
           package: "*.jar"
+```
