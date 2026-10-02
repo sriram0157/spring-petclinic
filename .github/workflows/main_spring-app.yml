@@ -25,6 +25,12 @@ jobs:
       - name: Build with Maven
         run: mvn clean package -DskipTests
 
+      - name: Check JAR files
+        run: |
+           echo "JAR files generated:"
+             ls -lh target/*.jar
+        
+
       - name: Azure Login
         uses: azure/login@v2
         with:
