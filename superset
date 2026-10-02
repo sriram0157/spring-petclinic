@@ -20,9 +20,12 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+      - name: Create ZIP package
+        run: zip -r website.zip . -x ".git/*" ".github/*"
+
       - name: Deploy Website
         uses: azure/webapps-deploy@v3
         with:
           app-name: spring-app
-          package: .
+          package: website.zip
 
