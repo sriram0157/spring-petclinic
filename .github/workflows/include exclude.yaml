@@ -1,0 +1,5 @@
+- name: Deploy Website
+  uses: azure/webapps-deploy@v3
+  with:
+      app-name: spring-app
+      package: .

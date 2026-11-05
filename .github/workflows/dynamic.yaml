@@ -1,0 +1,25 @@
+name: Dynamic
+
+on:
+  push:
+    branches:
+      - "*"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Install chart version
+        run: |
+          echo "BUILD_ID=$(date +%d-%m-%y)" >> $GITHUB_ENV
+
+      - name: add summary
+        run: |
+          echo "####################################" >> "$GITHUB_STEP_SUMMARY"
+          echo "build name : sample job ####################">>"$GITHUB_STEP_SUMMARY"
+          echo "build started day: ${{env.BUILD_ID}}">>"$GITHUB_STEP_SUMMARY"
+          echo  "########################## END #########################">>"$GITHUB_STEP_SUMMARY"
+          
